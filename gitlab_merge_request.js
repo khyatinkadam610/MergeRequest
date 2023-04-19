@@ -39,10 +39,8 @@ axios.get(apiEndpoint, {
 
       const comments = notesResponse.data;
       for (const comment of comments) {
-        const pattern = /added\s+(\d+)\s+commit(s)?/;
-        const match = pattern.exec(comment.body);
 
-        if (!match) {
+        if (comment["system"] === false) {
           const record = {
             merge_request_id: mergeRequest.iid,
             merge_request_title: mergeRequest.title,
