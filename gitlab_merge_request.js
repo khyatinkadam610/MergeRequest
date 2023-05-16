@@ -29,14 +29,14 @@ rl.question('Enter the project ID: ', (projectId) => {
               path: csvFilePath,
               header: [
                 { id: 'merge_request_id', title: 'Merge_Request_ID' },
-                {id:'merge_date',title:'Merged_At'},
+                { id: 'merge_date', title: 'Merged_At' },
                 { id: 'merge_request_title', title: 'Merge_Request_Title' },
-                { id: 'comment_author', title: 'Comment_Author'},
+                { id: 'comment_author', title: 'Comment_Author' },
                 { id: 'comment_date', title: 'Comment_At' },
                 { id: 'comment_body', title: 'Comment_Body' },
                 { id: 'commit_author', title: 'Commit_Author' },
-                { id : 'reviewer',title:'Reviewer'},
-                { id: 'commit_diff', title: 'Difference'}
+                { id: 'reviewer', title: 'Reviewer' },
+                { id: 'commit_diff', title: 'Difference' }
               ]
             });
 
@@ -61,18 +61,18 @@ rl.question('Enter the project ID: ', (projectId) => {
               const diffs = diffResponse.data;
 
               for (const comment of comments) {
-                for(const diff of diffs) {
+                for (const diff of diffs) {
                   if (comment["system"] === false) {
                     // console.log(comment);
                     const record = {
                       merge_request_id: mergeRequest.iid,
                       merge_request_title: mergeRequest.title,
-                      commit_author:mergeRequest.author.name,
+                      commit_author: mergeRequest.author.name,
                       comment_author: comment.author.name,
-                      reviewer:mergeRequest.merge_user.name,
+                      reviewer: mergeRequest.merge_user.name,
                       comment_body: comment.body,
-                      comment_date:comment.updated_at,
-                      merge_date:mergeRequest.merged_at,
+                      comment_date: comment.updated_at,
+                      merge_date: mergeRequest.merged_at,
                       commit_diff: diff.diff
                     };
                     csvRecords.push(record);
